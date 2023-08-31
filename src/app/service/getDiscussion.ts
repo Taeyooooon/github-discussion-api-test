@@ -1,9 +1,11 @@
 import { graphql } from '@octokit/graphql';
 
 const getDiscussion = async () => {
+  const githubToken = process.env.NEXT_PUBLIC_GITHUB_TOKEN;
+  console.log('GET : ', githubToken);
   const { repository, viewer }: any = await graphql({
     headers: {
-      authorization: `token ${process.env.GITHUB_TOKEN}`,
+      authorization: `token ${githubToken}`,
     },
     owner: 'Taeyooooon', // my github ID
     name: 'github-discussion-api-test', // github repository name
