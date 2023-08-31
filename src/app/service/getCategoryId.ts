@@ -7,10 +7,9 @@ const getCategoryId = async () => {
     headers: {
       authorization: `token ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}`,
     },
-    owner: `${owner}`,
-    name: `${name}`,
-    query: `
-    query repository($owner: String!, $name: String!){
+    owner,
+    name,
+    query: `query repository($owner: String!, $name: String!){
         repository(owner: $owner, name: $name) {
           id # RepositoryID
           name
