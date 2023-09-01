@@ -1,6 +1,8 @@
 'use client';
 import React, { useState } from 'react';
 import { createDiscussion } from '@/app/service/createDiscussion';
+import getRepositoryId from '@/app/service/getRepositoryId';
+import getAllCategoryId from '@/app/service/getAllCategoryId';
 
 const CreateDiscussion = () => {
   const [title, setTitle] = useState('');
@@ -10,7 +12,8 @@ const CreateDiscussion = () => {
     event.preventDefault();
 
     const owner = 'Taeyooooon';
-    const repositoryId = 'R_kgDOKNMC1g';
+    const repositoryId = await getRepositoryId();
+    const allCategoryId = await getAllCategoryId();
     const categoryId = 'DIC_kwDOKNMC1s4CY9pf'; // General
     const githubToken = process.env.NEXT_PUBLIC_GITHUB_TOKEN || '';
     try {
@@ -46,6 +49,7 @@ const CreateDiscussion = () => {
           <textarea value={body} onChange={(e) => setBody(e.target.value)} />
         </label>
         <br />
+        
         <button type='submit'>Create</button>
       </form>
     </>
