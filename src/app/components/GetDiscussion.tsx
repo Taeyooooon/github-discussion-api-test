@@ -60,11 +60,15 @@ const GetDiscussion = async () => {
                           __html: commentNode.bodyHTML,
                         }}
                       />
+                      <CreateComment
+                        discussionId={node.id}
+                        replyToId={commentNode.id}
+                        reply
+                      />
                     </div>
                   );
                 }
               )}
-              <h2>댓글쓰기</h2>
               <CreateComment discussionId={node.id} />
               <Button discussionId={node.id} />
             </section>

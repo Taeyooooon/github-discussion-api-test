@@ -5,7 +5,7 @@ export const createComment = async (
   discussionId: string,
   body: string,
   githubToken: string,
-  replyTo?: string
+  replyToId?: string
 ) => {
   const result: any = await graphql({
     headers: {
@@ -14,9 +14,11 @@ export const createComment = async (
     owner,
     discussionId,
     body,
-    query: `mutation CreateComment($discussionId: ID!, $body: String!) {
+    replyToId,
+    query: `mutation CreateComment($discussionId: ID!, $body: String!,$replyToId: ID) {
       addDiscussionComment(input: {
         discussionId: $discussionId,
+        replyToId : $replyToId
         body: $body
       }) {
         comment {

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import getRepositoryId from '@/app/service/getRepositoryId';
 import { createComment } from '@/app/service/createComment';
 
-const CreateComment = ({ discussionId }: any) => {
+const CreateComment = ({ discussionId, replyToId, reply = false }: any) => {
   const [body, setBody] = useState('');
 
   const handleSubmit = async (event: React.FormEvent) => {
@@ -17,7 +17,8 @@ const CreateComment = ({ discussionId }: any) => {
         owner,
         discussionId,
         body,
-        githubToken
+        githubToken,
+        replyToId
       );
       console.log('CreateDiscussion Result:', result);
     } catch (error) {
@@ -27,7 +28,7 @@ const CreateComment = ({ discussionId }: any) => {
 
   return (
     <>
-      <h2 className='text-2xl font-bold'>Create Discussion</h2>
+      <h2 className='text-2xl font-bold'>{reply ? '답글달기' : '댓글달기'}</h2>
       <form onSubmit={handleSubmit}>
         <label>
           댓글:
