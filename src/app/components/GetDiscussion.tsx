@@ -1,6 +1,7 @@
 import React from 'react';
 import getDiscussion from '@/app/service/getDiscussion';
 import Button from '@/app/components/Button';
+import CreateComment from '@/app/components/CreateComment';
 
 // interface Discussion {
 //   repository: {
@@ -63,6 +64,8 @@ const GetDiscussion = async () => {
                   );
                 }
               )}
+              <h2>댓글쓰기</h2>
+              <CreateComment discussionId={node.id} />
               <Button discussionId={node.id} />
             </section>
           );
