@@ -1,8 +1,9 @@
 import { graphql } from '@octokit/graphql';
+import { RequestParameters } from '@octokit/types';
 
 const getDiscussion = async () => {
   const githubToken = process.env.NEXT_PUBLIC_GITHUB_TOKEN;
-  const { repository, viewer }: any = await graphql({
+  const { repository, viewer }: any = await graphql<RequestParameters>({
     headers: {
       authorization: `token ${githubToken}`,
     },
