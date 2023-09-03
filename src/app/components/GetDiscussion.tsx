@@ -60,6 +60,23 @@ const GetDiscussion = async () => {
                           __html: commentNode.bodyHTML,
                         }}
                       />
+                      {commentNode.replies.nodes.map(
+                        (replyNode: any, index: number) => {
+                          console.log('REPLY : ', replyNode);
+                          return (
+                            <div
+                              key={index}
+                              className=' border rounded-lg m-2 p-2'
+                            >
+                              <div
+                                dangerouslySetInnerHTML={{
+                                  __html: replyNode.bodyHTML,
+                                }}
+                              />
+                            </div>
+                          );
+                        }
+                      )}
                       <CreateComment
                         discussionId={node.id}
                         replyToId={commentNode.id}

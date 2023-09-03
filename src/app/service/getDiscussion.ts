@@ -47,6 +47,36 @@ const getDiscussion = async () => {
                       bodyHTML
                       createdAt
                       id
+                      replies(last: 100) {
+                        nodes {
+                          id
+                          author {
+                            avatarUrl
+                            login
+                            url
+                          }
+                          viewerDidAuthor
+                          createdAt
+                          url
+                          authorAssociation
+                          lastEditedAt
+                          deletedAt
+                          isMinimized
+                          bodyHTML
+                          
+                          # 댓글 이모지
+                          #reactionGroups {
+                          #  content
+                          #  users {
+                          #    totalCount
+                          #  }
+                          #  viewerHasReacted
+                          #}
+                          replyTo {
+                            id
+                          }
+                        }
+                      }
                     }
                   }
                 }
