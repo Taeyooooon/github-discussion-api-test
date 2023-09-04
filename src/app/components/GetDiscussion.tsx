@@ -2,6 +2,7 @@ import React from 'react';
 import getDiscussion from '@/app/service/getDiscussion';
 import Button from '@/app/components/Button';
 import CreateComment from '@/app/components/CreateComment';
+import getRateLimit from '@/app/service/getRateLimit';
 
 // interface Discussion {
 //   repository: {
