@@ -36,6 +36,13 @@ const getDiscussion = async () => {
                   createdAt
                   id
                 }
+                reactionGroups {
+                  content
+                  users {
+                    totalCount
+                  }
+                  viewerHasReacted
+                }
                 # 댓글
                 comments(first: $num) {
                   edges {
@@ -47,6 +54,7 @@ const getDiscussion = async () => {
                       bodyHTML
                       createdAt
                       id
+                      deletedAt
                       replies(last: 100) {
                         nodes {
                           id
@@ -63,15 +71,15 @@ const getDiscussion = async () => {
                           deletedAt
                           isMinimized
                           bodyHTML
-                          
+
                           # 댓글 이모지
-                          #reactionGroups {
-                          #  content
-                          #  users {
-                          #    totalCount
-                          #  }
-                          #  viewerHasReacted
-                          #}
+                          reactionGroups {
+                            content
+                            users {
+                              totalCount
+                            }
+                            viewerHasReacted
+                          }
                           replyTo {
                             id
                           }

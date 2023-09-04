@@ -8,7 +8,6 @@ export const createDiscussion = async (
   categoryId: string,
   githubToken: string
 ) => {
-  console.log('CREATE : ', owner, repositoryId, title, body, categoryId, githubToken);
   const result: any = await graphql({
     headers: {
       authorization: `token ${githubToken}`,

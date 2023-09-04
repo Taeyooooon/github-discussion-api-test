@@ -5,7 +5,9 @@ import deleteDiscussion from '@/app/service/deleteDiscussion';
 
 const Button = ({ discussionId }: any) => {
   const onClick = (discussionId: string) => {
-    deleteDiscussion(discussionId).then((r) => console.log('delete : ', r));
+    deleteDiscussion(discussionId)
+      .then((r) => console.log('Deleted : ', r))
+      .catch((error) => console.error('Delete error : ', error));
   };
   return (
     <button
