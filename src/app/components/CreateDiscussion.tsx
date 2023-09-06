@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createDiscussion } from '@/app/service/createDiscussion';
 import getRepositoryId from '@/app/service/getRepositoryId';
 import getAllCategoryId from '@/app/service/getAllCategoryId';
@@ -7,15 +7,31 @@ import getAllCategoryId from '@/app/service/getAllCategoryId';
 const CreateDiscussion = () => {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
+  const [categories, setCategories] = useState([]);
+  const [categoryId, setCategoryId] = useState('');
 
-  const handleSubmit = async (event: React.FormEvent) => {
+  const owner = 'Taeyooooon';
+  const name = 'github-discussion-api-test';
+  const githubToken = process.env.NEXT_PUBLIC_GITHUB_TOKEN || '';
+
+  useEffect(() => {
+    const getCategories = async () => {
+      const allCategories = await getAllCategoryId(owner, name);
+      setCategories(allCategories);
+    };
+
+    getCategories();
+  }, []);
+
+  const onSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    const owner = 'Taeyooooon';
-    const repositoryId = await getRepositoryId();
-    const allCategoryId = await getAllCategoryId();
-    const categoryId = 'DIC_kwDOKNMC1s4CY9pf'; // General
-    const githubToken = process.env.NEXT_PUBLIC_GITHUB_TOKEN || '';
+    if (!categoryId) {
+      return alert('Please select a category');
+    }
+
+    const repositoryId = await getRepositoryId(owner, name);
+
     try {
       const result = await createDiscussion(
         owner,
@@ -25,16 +41,16 @@ const CreateDiscussion = () => {
         categoryId,
         githubToken
       );
-      console.log('CreateDiscussion Result:', result);
+      console.log('CreateDiscussion Result : ', result);
     } catch (error) {
-      console.error('Error creating discussion:', error);
+      console.error('Create Discussion Error : ', error);
     }
   };
 
   return (
-    <>
+    <section className=' border-2 border-black mt-4 p-2 rounded-lg'>
       <h2 className='text-2xl font-bold'>Create Discussion</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={onSubmit}>
         <label>
           Title:
           <input
@@ -49,10 +65,29 @@ const CreateDiscussion = () => {
           <textarea value={body} onChange={(e) => setBody(e.target.value)} />
         </label>
         <br />
-        
-        <button type='submit'>Create</button>
+        <label>
+          Category:
+          <select
+            value={categoryId}
+            onChange={(e) => setCategoryId(e.target.value)}
+          >
+            <option disabled value=''>
+              Select a category
+            </option>
+            {categories.map((category: any) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
+          </select>
+        </label>
+        <br />
+
+        <button className=' bg-green-500 px-2 py-1 rounded-lg' type='submit'>
+          글쓰기
+        </button>
       </form>
-    </>
+    </section>
   );
 };
 

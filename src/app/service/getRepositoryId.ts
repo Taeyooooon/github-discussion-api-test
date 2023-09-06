@@ -6,10 +6,8 @@ interface RepositoryResult {
   };
 }
 
-const getRepositoryId = async () => {
+const getRepositoryId = async (owner: string, name: string) => {
   const githubToken = process.env.NEXT_PUBLIC_GITHUB_TOKEN;
-  const owner = 'Taeyooooon';
-  const name = 'github-discussion-api-test';
   const { repository }: RepositoryResult = await graphql({
     headers: {
       authorization: `token ${githubToken}`,

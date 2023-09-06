@@ -10,7 +10,6 @@ type Props = {
 export default function ProductsError({ error, reset }: Props) {
   useEffect(() => {
     console.error('ERROR : ', error);
-    console.log(error);
   }, [error]);
 
   return (

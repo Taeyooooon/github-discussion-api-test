@@ -1,6 +1,7 @@
 'use client';
 import CreateComment from '@/app/components/CreateComment';
 import DeleteButton from '@/app/components/DeleteButton';
+import { answerComment } from '@/app/service/answerComment';
 import { updateComment } from '@/app/service/updateComment';
 import React, { useState } from 'react';
 
@@ -20,6 +21,15 @@ const DiscussionComments = ({ node }: any) => {
                 __html: commentNode.bodyHTML,
               }}
             />
+            <button
+              disabled={!commentNode.viewerCanMarkAsAnswer}
+              className=' disabled:bg-red-800 bg-green-500 text-white px-2 py-1 rounded-lg'
+              onClick={() => {
+                answerComment(commentNode.id);
+              }}
+            >
+              {commentNode.viewerCanMarkAsAnswer ? '채택하기' : '채택권한없음'}
+            </button>
             <DeleteButton commentId={commentNode.id} />
             <button
               className=' bg-blue-500 text-white px-2 py-1 rounded-lg'

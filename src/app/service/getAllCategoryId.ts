@@ -1,8 +1,8 @@
 import { graphql } from '@octokit/graphql';
 
-const getAllCategoryId = async () => {
-  const owner = 'Taeyooooon';
-  const name = 'github-discussion-api-test';
+const getAllCategoryId = async (owner: string, name: string) => {
+  // const owner = 'Taeyooooon';
+  // const name = 'github-discussion-api-test';
   const { repository }: any = await graphql({
     headers: {
       authorization: `token ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}`,

@@ -44,6 +44,7 @@ const Discussion = async () => {
           return (
             <section key={index} className=' border rounded-lg p-2'>
               <h1 className=' font-semibold'>제목 : {node.title}</h1>
+              <h2 className=' font-semibold'>제목 : {node.title}</h2>
               <span className=' font-semibold'>본문 : </span>
               <div dangerouslySetInnerHTML={{ __html: node.bodyHTML }} />
 
